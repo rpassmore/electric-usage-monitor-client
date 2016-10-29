@@ -21,18 +21,6 @@ export class ReadingsService {
       .catch(handleError);
   }
 
-
-//   public getDailyReadings(): Observable<Reading[]> {
-//     console.log('getting...');
-//     let readings$ = this.http
-//       .get(`${this.baseUrl}/readings`, { headers: this.getHeaders() })
-//       .map((res: Response) => mapReadings(res))
-//       .do(data => console.log('All: ' +  JSON.stringify(data)))
-//       .catch(handleError);
-//     console.log('got...');
-//     return readings$;
-//   }
-
 //   private getHeaders() {
 //     let headers = new Headers();
 //     headers.append('Accept', 'application/json');
@@ -40,26 +28,6 @@ export class ReadingsService {
 //   }
 // }
 }
-
-// function mapReadings(response: Response): Reading[] {
-//   // uncomment to simulate error:
-//   // throw new Error('ups! Force choke!');
-
-//   // The response of the API has a results
-//   // property with the actual results  
-//   console.log('mapReadings ', response.json())
-//   return response.json().results.map(toReading);
-// }
-
-// function toReading(r: any): Reading {
-//   let reading = <Reading>({
-//     current: r.current,
-//     voltage: r.voltage,
-//     power: r.current * r.voltage,
-//   });
-//   console.log('Parsed reading:', reading);
-//   return reading;
-// }
 
 // this could also be a private method of the component class
 function handleError(error: any) {
@@ -71,4 +39,3 @@ function handleError(error: any) {
   // throw an application level error
   return Observable.throw(errorMsg);
 }
-

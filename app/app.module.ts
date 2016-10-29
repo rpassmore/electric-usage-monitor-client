@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app.routing.module';
 import {HttpModule} from '@angular/http';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 //My modules
 import { AppComponent } from './app.component';
@@ -14,6 +15,7 @@ import { HistoricReadingsComponent } from './app.historic-readings.component';
     BrowserModule,
     AppRoutingModule,
     HttpModule,
+    ChartsModule,
   ],
   declarations: [
     AppComponent,
