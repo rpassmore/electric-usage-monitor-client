@@ -1,10 +1,14 @@
+
 <div class="row">
 	<div class="col-md-6">
-		<div style="display: block;">
+    <nouislider [connect]="true" [min]="0" [max]="72" [step]="1" [(ngModel)]="someRange" (change)="onChange($event)"></nouislider>
+  </div>
+  <div class="col-md-6">
+		<div style="display: block;">      
 			<canvas baseChart width="200" height="200" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
 				[colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
 				(chartClick)="chartClicked($event)"></canvas>
-		</div>
+		</div>    
 	</div>
 	<div class="col-md-6" style="margin-bottom: 10px">
 		<table class="table table-responsive table-condensed">

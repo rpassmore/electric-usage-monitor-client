@@ -15,6 +15,13 @@ export class ReadingsService {
   public getDailyReadings(): Observable<Reading[]> {    
 //res.json().content as Reading[] <- return an array of Readings
 //res.json().result as Reading[] <- returns an array of objects with content link and paging etc.
+    return this.http.get(`${this.baseUrl}/dailyreadings`)
+      .map((res: Response) => res.json().content as Reading[])
+      .do(data => console.log('All: ' + JSON.stringify(data)))
+      .catch(handleError);
+  }
+
+public getRecentReadings(): Observable<Reading[]> {    
     return this.http.get(`${this.baseUrl}/readings`)
       .map((res: Response) => res.json().content as Reading[])
       .do(data => console.log('All: ' + JSON.stringify(data)))

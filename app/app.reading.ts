@@ -2,7 +2,7 @@ export interface Reading {
 
     current: number;
     power: number;
-    readingDate: Date;
+    date: Date;
     voltage: number;
 
 }

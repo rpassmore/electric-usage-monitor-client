@@ -135,6 +135,12 @@ nav a.active {
   margin-right: .8em;
   border-radius: 4px 0 0 4px;
 }
+.noUi-connect {
+	background: #337ab7;
+}
+[nouislider] {
+	margin: 15px 0;
+}
 /* everywhere else */
 * {
   font-family: Arial, Helvetica, sans-serif;

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app.routing.module';
 import {HttpModule} from '@angular/http';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { NouisliderModule } from 'ng2-nouislider';
 
 //My modules
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { HistoricReadingsComponent } from './app.historic-readings.component';
     AppRoutingModule,
     HttpModule,
     ChartsModule,
+    NouisliderModule,
   ],
   declarations: [
     AppComponent,
