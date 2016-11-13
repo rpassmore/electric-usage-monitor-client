@@ -1,6 +1,6 @@
 import { resetFakeAsyncZone } from '@angular/core/testing';
 import { Injectable, OnInit } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { Headers, Http, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { Reading } from './app.reading';
@@ -12,28 +12,43 @@ export class ReadingsService {
 
   constructor(private http: Http) { }
 
-  public getDailyReadings(): Observable<Reading[]> {    
-//res.json().content as Reading[] <- return an array of Readings
-//res.json().result as Reading[] <- returns an array of objects with content link and paging etc.
-    return this.http.get(`${this.baseUrl}/dailyreadings`)
+/**
+ * 
+ * @param start - the oldest date to get data for 
+ * @param end - the newest date to get date for
+ */
+  public getDailyReadings(start: Date, end: Date): Observable<Reading[]> {
+    //res.json().content as Reading[] <- return an array of Readings
+    //res.json().result as Reading[] <- returns an array of objects with content link and paging etc.
+    var params = new URLSearchParams();
+    params.append('start', start.toISOString());
+    params.append('end', end.toISOString());     
+
+    return this.http.get(`${this.baseUrl}/dailyreadings/search/findByDateBetween`, { search: params })
       .map((res: Response) => res.json().content as Reading[])
-      .do(data => console.log('All: ' + JSON.stringify(data)))
+      //.do(data => console.log('All: ' + JSON.stringify(data)))
       .catch(handleError);
   }
 
-public getRecentReadings(): Observable<Reading[]> {    
-    return this.http.get(`${this.baseUrl}/readings`)
-      .map((res: Response) => res.json().content as Reading[])
-      .do(data => console.log('All: ' + JSON.stringify(data)))
+/**
+ * 
+ * @param start - the oldest date to get data for 
+ * @param end - the newest date to get date for
+ */
+  public getRecentReadings(start: Date, end: Date): Observable<Reading[]> {
+    var params = new URLSearchParams();
+    params.append('start', start.toISOString());
+    params.append('end', end.toISOString());        
+    return this.http.get(`${this.baseUrl}/readings/search/findByDateBetween`, { search: params })
+      .map((res: Response) => res.json().content as Reading[])      
       .catch(handleError);
   }
 
-//   private getHeaders() {
-//     let headers = new Headers();
-//     headers.append('Accept', 'application/json');
-//     return headers;
-//   }
-// }
+  public getCurrentReadings() : Observable<Reading> {
+    return this.http.get(`${this.baseUrl}/readings/search/findFirstByOrderByDateDesc`)
+      .map((res: Response) => res.json() as Reading)
+      .catch(handleError);
+  }
 }
 
 // this could also be a private method of the component class

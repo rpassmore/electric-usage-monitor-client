@@ -27,7 +27,7 @@
       'ng2-charts':                'npm:ng2-charts',
       //'ng2-charts-components': 'npm:ng2-charts/components/charts/charts.js'
       'nouislider':                'node_modules/nouislider',
-      'ng2-nouislider':            'node_modules/ng2-nouislider',
+      'ng2-nouislider':            'node_modules/ng2-nouislider',      
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -47,7 +47,7 @@
       },
       'ng2-charts': { main: 'ng2-charts.js', defaultExtension: 'js' },
       'nouislider': { main: 'distribute/nouislider.js', defaultExtension: 'js' },
-      'ng2-nouislider': { main: 'src/nouislider.js', defaultExtension: 'js' },
+      'ng2-nouislider': { main: 'src/nouislider.js', defaultExtension: 'js' },      
     }
   });
 })(this);

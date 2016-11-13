@@ -1,40 +1,35 @@
-import { Data } from '@angular/router';
-import { RecentReadingsComponent } from './app.recent-readings.component';
-import { async } from '@angular/core/testing';
-import { Observable } from 'rxjs/Rx';
-import { Reading } from './app.reading';
+import { ElecChartComponent } from './app.chart.component';
 import { ReadingsService } from './app.readings.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
-    moduleId: module.id,
-    providers: [ReadingsService],
-    selector: 'historic-readings',
-    //templateUrl: './BasicExample.component.html'
-    template: `
-    <h1>Historic readings</h1>        
-  <div *ngIf="readingsError">An error occurred while loading the historic readings!</div>
-  <ul>     
-     <li *ngFor="let reading of readings">{{reading.current}}</li>
-   </ul> 
-    `
+  moduleId: module.id,
+  selector: 'historic-readings',
+  templateUrl: './app.historic-readings.component.html'
 })
-export class HistoricReadingsComponent {
-    public readingsError: Boolean = false;
-    public readings: Array<Reading>;    
+export class HistoricReadingsComponent {  
 
-    constructor(private _readingsService: ReadingsService) {
-    }
+@ViewChild(ElecChartComponent)  
+public elecChart: ElecChartComponent;  
 
-    public ngOnInit() {
-        console.log('getting historic readings');
-        this.getDailyReadings();
-    }
+  constructor(private _readingsService: ReadingsService) {    
+  }
 
-    private getDailyReadings() {
-        this._readingsService.getDailyReadings().subscribe(data => {
-            this.readings = data;
-            console.log(this.readings);
-        });
-    }    
+  public ngOnInit() {
+    this.getHistoricReadings();
+  }
+
+  private hoursToMilli(hours : number) : number {
+    return hours * 60 * 60 * 1000;
+  }
+
+  private getHistoricReadings() {
+    let refDate = new Date();
+    let end : Date = new Date();
+    let start : Date = new Date(0);
+
+    this._readingsService.getDailyReadings(start, end).subscribe(data => {
+      this.elecChart.updateChart(data); 
+    });
+  }   
 }
